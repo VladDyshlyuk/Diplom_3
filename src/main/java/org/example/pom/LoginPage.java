@@ -50,7 +50,10 @@ public class LoginPage {
         setPassword(password);
     }
 
-
+    @Step("Is login form visible")
+    public boolean isLoginFormVisible(){
+        return driver.findElement(loginForm).isDisplayed();
+    }
 
 
 }
