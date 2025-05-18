@@ -30,6 +30,8 @@ public class RegisterPage {
     private final By wrongPasswordError = By.cssSelector(".input__error");
     //Локатор кнопки "Войти"
     private final By loginButton = By.cssSelector(".button_button__33qZ0");
+    //Локатор кнопки "Войти" на странцие регистрации
+    private final By loginLink = By.xpath("/html/body/div/div/main/div/div/p/a");
 
     public void waitForLoadForm() {
         new WebDriverWait(this.driver, Duration.ofSeconds(3))
@@ -65,6 +67,11 @@ public class RegisterPage {
     @Step("Set sign up button")
     public void clickSignUpButton(){
         driver.findElement(signUpButton).click();
+    }
+
+    @Step("Click login link")
+    public void clickLoginLink(){
+        driver.findElement(loginLink).click();
     }
 
     @Step("Fill registration form")
