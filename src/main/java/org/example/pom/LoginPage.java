@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
-    private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
+    private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
     private final WebDriver driver;
 
 
@@ -50,10 +50,7 @@ public class LoginPage {
         setPassword(password);
     }
 
-    @Step("Check that profile button is visible")
-    public boolean isProfileButtonVisible(){
-        return driver.findElement(profileButton).isDisplayed();
-    }
+
 
 
 }
