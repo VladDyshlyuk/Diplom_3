@@ -2,9 +2,7 @@ import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.example.api.UserClient;
 import org.example.models.User;
-import org.example.pom.LoginPage;
 import org.example.pom.MainPage;
-import org.example.pom.ProfilePage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,21 +44,20 @@ public class MainPageTests {
     @DisplayName("Check if scrolling to the section works")
     public void checkIfScrollingToTheSectionWorks() {
         mainPage.open();
-        if(section.equals(FIRST_SECTION_NAME)){
-            mainPage.scrollToLastSection();
-            mainPage.clickSauceSection();
-            mainPage.clickBunSection();
-            assertTrue(mainPage.isSectionVisible(section));
-            return;
-        }
-        if (section.equals("Соусы")){
-            mainPage.clickSauceSection();
-            assertTrue(mainPage.isSectionVisible(section));
-            return;
-        }
-        if (section.equals("Начинки")){
-            mainPage.clickFillingSection();
-            assertTrue(mainPage.isSectionVisible(section));
+        switch (section) {
+            case FIRST_SECTION_NAME:
+                mainPage.scrollToLastSection();
+                mainPage.clickBunSection();
+                assertTrue(mainPage.isBunsVisible());
+                return;
+            case "Соусы":
+                mainPage.clickSauceSection();
+                assertTrue(mainPage.isSauceVisible());
+                return;
+            case "Начинки":
+                mainPage.clickFillingSection();
+                assertTrue(mainPage.isFillingsVisible());
+                break;
         }
 
     }
@@ -71,7 +68,7 @@ public class MainPageTests {
         user = randomUser();
         userClient.create(user);
         driver = createWebDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
         mainPage = new MainPage(driver);
     }
 
